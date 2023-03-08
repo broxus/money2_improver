@@ -1,7 +1,7 @@
 name: money2_improver
-description: A starting point for Dart libraries or applications.
+description: This is just a 'fix' package for Money2
 version: 1.0.0
-# repository: https://github.com/my_org/my_repo
+repository: https://github.com/broxus/money2_improver
 
 environment:
   sdk: '>=2.19.2 <3.0.0'
