@@ -17,16 +17,21 @@ extension MoneyImprover on Money {
   ///
   /// S outputs the currencies symbol e.g. $.
   /// 0 A single digit
-  /// # A single digit, omitted if the value is zero (works only for integer part)
+  /// # A single digit, omitted if the value is zero (works only for integer part and as last
+  ///   fractional symbol as flag for trimming zeros)
   /// . or , Decimal separator dependant on [invertSeparator]
   /// - Minus sign
   /// , or . Grouping separator dependant on [invertSeparator]
   /// space Space character.
-  String formatImproved({String? pattern, bool invertSeparator = false, bool trimZerosRigh = false}) {
+  String formatImproved({String? pattern, bool invertSeparator = false}) {
     final p = pattern ?? currency.pattern;
+    final decimalSeparator = invertSeparator ? ',' : '.';
     return p.replaceAllMapped(RegExp(r'([0#.\-,]+)'), (m) {
       final result = amount.format(m[0]!, invertSeparator: invertSeparator);
-      return trimZerosRigh ? result.replaceFirst(RegExp(r'0*$'), '') : result;
+      final trimZerosRight = RegExp(r'#$').hasMatch(m[0]!);
+      return trimZerosRight
+          ? result.replaceFirst(RegExp(r'0*$'), '').replaceFirst(RegExp('\\$decimalSeparator\$'), '')
+          : result;
     }).replaceAllMapped(RegExp(r'S'), (m) => currency.symbol);
   }
 }

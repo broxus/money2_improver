@@ -1,6 +1,6 @@
 name: money2_improver
 description: This is just a 'fix' package for Money2
-version: 1.0.0
+version: 1.1.0
 repository: https://github.com/broxus/money2_improver
 
 environment:
