@@ -34,4 +34,62 @@ extension MoneyImprover on Money {
           : result;
     }).replaceAllMapped(RegExp(r'S'), (m) => currency.symbol);
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'amount': amount.toJson(),
+      'currency': currency.toJson(),
+    };
+  }
+
+  static Money fromJson(Map<String, dynamic> json) {
+    return Money.fromFixedWithCurrency(
+      FixedImprover.fromJson(json['amount']),
+      CurrencyImprover.fromJson(json['currency']),
+    );
+  }
+}
+
+extension CurrencyImprover on Currency {
+  Map<String, dynamic> toJson() {
+    return {
+      'code': code,
+      'scale': scale,
+      'symbol': symbol,
+      'pattern': pattern,
+      'invertSeparators': invertSeparators,
+      'country': country,
+      'unit': unit,
+      'name': name,
+    };
+  }
+
+  static Currency fromJson(Map<String, dynamic> json) {
+    return Currency.create(
+      json['code'],
+      json['scale'],
+      symbol: json['symbol'],
+      pattern: json['pattern'],
+      invertSeparators: json['invertSeparators'],
+      country: json['country'],
+      unit: json['unit'],
+      name: json['name'],
+    );
+  }
+}
+
+extension FixedImprover on Fixed {
+  Map<String, dynamic> toJson() {
+    return {
+      'minorUnits': minorUnits,
+      'scale': scale,
+    };
+  }
+
+  static Fixed fromJson(Map<String, dynamic> json) {
+    return Fixed.fromBigInt(
+      json['minorUnits'],
+      scale: json['scale'],
+    );
+  }
 }
