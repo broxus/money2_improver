@@ -1,3 +1,7 @@
+## 1.3.1
+
+- Money2 version up
+
 ## 1.3.0
 
 - Money2 version up

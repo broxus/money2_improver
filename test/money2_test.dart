@@ -18,7 +18,8 @@ void main() {
       expect(c, isNotNull);
       final str = scale == 0 ? '1' : '1.${'0' * (scale - 1)}1';
       final fmt = scale == 0 ? 'S#' : 'S#.${'#' * scale}';
-      expect(Money.parseWithCurrency(str, c!).format(fmt), '=$scale=$str', reason: 'Failed with $scale scale');
+      expect(Money.parseWithCurrency(str, c!).format(fmt), '=$scale=$str',
+          reason: 'Failed with $scale scale');
     }
   });
 
@@ -28,7 +29,8 @@ void main() {
       expect(c, isNotNull);
       final str = ints == 0 ? '0' : '9' * ints;
       final fmt = 'S#';
-      expect(Money.parseWithCurrency(str, c!).format(fmt), '=0=$str', reason: 'Failed with $ints ints');
+      expect(Money.parseWithCurrency(str, c!).format(fmt), '=0=$str',
+          reason: 'Failed with $ints ints');
     }
   });
 
