@@ -1,3 +1,11 @@
+## 1.3.3
+
+- Just update changelog :)
+
+## 1.3.2
+
+- Serialize Fixed.minorUnits as String (instead of BigInt)
+
 ## 1.3.1
 
 - Money2 version up
