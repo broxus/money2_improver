@@ -5,8 +5,10 @@ extension MoneyImprover on Money {
   ///
   /// The [amount] is scaled to match the currency selected via
   /// [currency].
-  static Money parseWithCurrencyImproved(String amount, Currency currency, {int? scale}) =>
-      Money.fromFixedWithCurrency(Fixed.parse(amount, scale: scale ?? currency.scale), currency);
+  static Money parseWithCurrencyImproved(String amount, Currency currency,
+          {int? scale}) =>
+      Money.fromFixedWithCurrency(
+          Fixed.parse(amount, scale: scale ?? currency.scale), currency);
 
   /// Formats a [Money] value into a String according to the
   /// passed [pattern].
@@ -30,7 +32,9 @@ extension MoneyImprover on Money {
       final result = amount.format(m[0]!, invertSeparator: invertSeparator);
       final trimZerosRight = RegExp(r'#$').hasMatch(m[0]!);
       return trimZerosRight
-          ? result.replaceFirst(RegExp(r'0*$'), '').replaceFirst(RegExp('\\$decimalSeparator\$'), '')
+          ? result
+              .replaceFirst(RegExp(r'0*$'), '')
+              .replaceFirst(RegExp('\\$decimalSeparator\$'), '')
           : result;
     }).replaceAllMapped(RegExp(r'S'), (m) => currency.symbol);
   }
@@ -81,14 +85,14 @@ extension CurrencyImprover on Currency {
 extension FixedImprover on Fixed {
   Map<String, dynamic> toJson() {
     return {
-      'minorUnits': minorUnits,
+      'minorUnits': minorUnits.toString(),
       'scale': scale,
     };
   }
 
   static Fixed fromJson(Map<String, dynamic> json) {
     return Fixed.fromBigInt(
-      json['minorUnits'],
+      BigInt.parse(json['minorUnits']),
       scale: json['scale'],
     );
   }

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:test/test.dart';
 import 'package:money2/money2.dart';
 import 'package:money2_improver/money2_improver.dart';
@@ -10,6 +12,13 @@ void main() {
     final f0 = Fixed.parse(amount);
     final json = f0.toJson();
     final f1 = FixedImprover.fromJson(json);
+    expect(f1.toString(), amount);
+  });
+
+  test('Fixed jsonEncode', () {
+    final f0 = Fixed.parse(amount);
+    final json = jsonEncode(f0.toJson());
+    final f1 = FixedImprover.fromJson(jsonDecode(json));
     expect(f1.toString(), amount);
   });
 
