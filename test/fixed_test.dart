@@ -9,7 +9,11 @@ void main() {
     for (var scale = 0; scale <= maxScale; scale++) {
       final str = scale == 0 ? '1' : '1.${'0' * (scale - 1)}1';
       final fmt = scale == 0 ? 'S#' : '#.${'#' * scale}';
-      expect(Fixed.parse(str, scale: scale).format(fmt), str, reason: 'Failed with $scale scale');
+      expect(
+        Fixed.parse(str, scale: scale).format(fmt),
+        str,
+        reason: 'Failed with $scale scale',
+      );
     }
   });
 
@@ -17,7 +21,8 @@ void main() {
     for (var ints = 0; ints <= maxInts; ints++) {
       final str = ints == 0 ? '0' : '9' * ints;
       final fmt = '#';
-      expect(Fixed.parse(str, scale: 0).format(fmt), str, reason: 'Failed with $ints ints');
+      expect(Fixed.parse(str, scale: 0).format(fmt), str,
+          reason: 'Failed with $ints ints');
     }
   });
 
@@ -29,11 +34,13 @@ void main() {
 
         final expectIntsStr = ints == 0 ? '0' : '9' * ints;
 
-        final expectStr = scale == 0 ? expectIntsStr : '$expectIntsStr.${'0' * (scale - 1)}1';
+        final expectStr =
+            scale == 0 ? expectIntsStr : '$expectIntsStr.${'0' * (scale - 1)}1';
 
         final fmt = scale == 0 ? '0' : '0.${'0' * scale}';
 
-        expect(Fixed.parse(str, scale: scale).format(fmt), expectStr, reason: 'Failed with $scale scale, $ints ints');
+        expect(Fixed.parse(str, scale: scale).format(fmt), expectStr,
+            reason: 'Failed with $scale scale, $ints ints');
       }
     }
   });

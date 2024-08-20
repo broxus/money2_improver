@@ -14,36 +14,86 @@ void main() {
   });
 
   test('test default currency formatting', () {
-    final everWithDefaultFormatting = Currency.create('EVER', 9, symbol: 'EVER');
-    expect(MoneyImprover.parseWithCurrencyImproved('2.0', everWithDefaultFormatting).formatImproved(), 'EVER2.00',
-        reason: 'Failed default formatting');
+    final everWithDefaultFormatting = Currency.create(
+      'EVER',
+      9,
+      symbol: 'EVER',
+    );
+    expect(
+      MoneyImprover.parseWithCurrencyImproved(
+        '2.0',
+        everWithDefaultFormatting,
+      ).formatImproved(),
+      'EVER2.00',
+      reason: 'Failed default formatting',
+    );
   });
 
   test('test custom currency formatting', () {
-    final everWithDefaultFormatting = Currency.create('EVER', 9, symbol: 'EVER', pattern: '0.000000000 S');
+    final everWithDefaultFormatting = Currency.create(
+      'EVER',
+      9,
+      symbol: 'EVER',
+      pattern: '0.000000000 S',
+    );
     expect(
-        MoneyImprover.parseWithCurrencyImproved('2.0', everWithDefaultFormatting).formatImproved(), '2.000000000 EVER',
-        reason: 'Failed custom formatting');
+      MoneyImprover.parseWithCurrencyImproved(
+        '2.0',
+        everWithDefaultFormatting,
+      ).formatImproved(),
+      '2.000000000 EVER',
+      reason: 'Failed custom formatting',
+    );
   });
 
   test('test custom currency formatting 2', () {
-    final everWithDefaultFormatting = Currency.create('EVER', 9, symbol: 'EVER', pattern: '0.000000000 S');
+    final everWithDefaultFormatting = Currency.create(
+      'EVER',
+      9,
+      symbol: 'EVER',
+      pattern: '0.000000000 S',
+    );
     expect(
-        MoneyImprover.parseWithCurrencyImproved('2.01', everWithDefaultFormatting).formatImproved(), '2.010000000 EVER',
-        reason: 'Failed custom formatting');
+      MoneyImprover.parseWithCurrencyImproved(
+        '2.01',
+        everWithDefaultFormatting,
+      ).formatImproved(),
+      '2.010000000 EVER',
+      reason: 'Failed custom formatting',
+    );
   });
 
   test('test custom currency formatting 3 (trim zeros)', () {
-    final everWithDefaultFormatting = Currency.create('EVER', 9, symbol: 'EVER', pattern: '0.######### S');
-    expect(MoneyImprover.parseWithCurrencyImproved('2.01', everWithDefaultFormatting).formatImproved(), '2.01 EVER',
-        reason: 'Failed custom formatting');
+    final everWithDefaultFormatting = Currency.create(
+      'EVER',
+      9,
+      symbol: 'EVER',
+      pattern: '0.######### S',
+    );
+    expect(
+      MoneyImprover.parseWithCurrencyImproved(
+        '2.01',
+        everWithDefaultFormatting,
+      ).formatImproved(),
+      '2.01 EVER',
+      reason: 'Failed custom formatting',
+    );
   });
 
   test('test custom explicit formatting', () {
-    final everWithDefaultFormatting = Currency.create('EVER', 9, symbol: 'EVER', pattern: '0.######### S');
+    final everWithDefaultFormatting = Currency.create(
+      'EVER',
+      9,
+      symbol: 'EVER',
+      pattern: '0.######### S',
+    );
     expect(
-        MoneyImprover.parseWithCurrencyImproved('2.01', everWithDefaultFormatting)
-            .formatImproved(pattern: 'S 0.#########'),
+        MoneyImprover.parseWithCurrencyImproved(
+          '2.01',
+          everWithDefaultFormatting,
+        ).formatImproved(
+          pattern: 'S 0.#########',
+        ),
         'EVER 2.01',
         reason: 'Failed custom formatting');
   });
@@ -54,7 +104,10 @@ void main() {
       expect(c, isNotNull);
       final str = scale == 0 ? '0' : '0.${'0' * (scale - 1)}1';
       final fmt = scale == 0 ? '0' : '0.${'#' * scale}';
-      expect(MoneyImprover.parseWithCurrencyImproved(str, c!).formatImproved(pattern: fmt), str,
+      expect(
+          MoneyImprover.parseWithCurrencyImproved(str, c!)
+              .formatImproved(pattern: fmt),
+          str,
           reason: 'Failed with $scale scale');
     }
   });
@@ -65,7 +118,10 @@ void main() {
       expect(c, isNotNull);
       final str = ints == 0 ? '0' : '9' * ints;
       final fmt = '0';
-      expect(MoneyImprover.parseWithCurrencyImproved(str, c!).formatImproved(pattern: fmt), str,
+      expect(
+          MoneyImprover.parseWithCurrencyImproved(str, c!)
+              .formatImproved(pattern: fmt),
+          str,
           reason: 'Failed with $ints ints');
     }
   });
@@ -78,7 +134,10 @@ void main() {
         final intsStr = ints == 0 ? '0' : '9' * ints;
         final str = scale == 0 ? intsStr : '$intsStr.${'0' * (scale - 1)}1';
         final fmt = scale == 0 ? '0' : '0.${'0' * scale}';
-        expect(MoneyImprover.parseWithCurrencyImproved(str, c!).formatImproved(pattern: fmt), str,
+        expect(
+            MoneyImprover.parseWithCurrencyImproved(str, c!)
+                .formatImproved(pattern: fmt),
+            str,
             reason: 'Failed with $scale scale, $ints ints');
       }
     }
