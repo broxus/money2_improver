@@ -74,13 +74,13 @@ extension CurrencyImprover on Currency {
     return Currency.create(
       json['code'],
       json['scale'],
-      symbol: json['symbol'],
-      pattern: json['pattern'],
-      groupSeparator: json['groupSeparator'],
-      decimalSeparator: json['decimalSeparator'],
-      country: json['country'],
-      unit: json['unit'],
-      name: json['name'],
+      symbol: json['symbol'] ?? r'$',
+      pattern: json['pattern'] ?? Currency.defaultPattern,
+      groupSeparator: json['groupSeparator'] ?? ',',
+      decimalSeparator: json['decimalSeparator'] ?? '.',
+      country: json['country'] ?? '',
+      unit: json['unit'] ?? '',
+      name: json['name'] ?? '',
     );
   }
 }
@@ -96,7 +96,7 @@ extension FixedImprover on Fixed {
   static Fixed fromJson(Map<String, dynamic> json) {
     return Fixed.fromBigInt(
       BigInt.parse(json['minorUnits']),
-      scale: json['scale'],
+      scale: json['scale'] ?? 2,
     );
   }
 }
