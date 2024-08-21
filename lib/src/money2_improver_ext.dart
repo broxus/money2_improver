@@ -8,7 +8,8 @@ extension MoneyImprover on Money {
   static Money parseWithCurrencyImproved(String amount, Currency currency,
           {int? scale}) =>
       Money.fromFixedWithCurrency(
-          Fixed.parse(amount, scale: scale ?? currency.scale), currency);
+          Fixed.parse(amount, scale: scale ?? currency.decimalDigits),
+          currency);
 
   /// Formats a [Money] value into a String according to the
   /// passed [pattern].
@@ -57,11 +58,12 @@ extension MoneyImprover on Money {
 extension CurrencyImprover on Currency {
   Map<String, dynamic> toJson() {
     return {
-      'code': code,
-      'scale': scale,
+      'code': isoCode,
+      'scale': decimalDigits,
       'symbol': symbol,
       'pattern': pattern,
-      'invertSeparators': invertSeparators,
+      'groupSeparator': groupSeparator,
+      'decimalSeparator': decimalSeparator,
       'country': country,
       'unit': unit,
       'name': name,
@@ -72,12 +74,13 @@ extension CurrencyImprover on Currency {
     return Currency.create(
       json['code'],
       json['scale'],
-      symbol: json['symbol'],
-      pattern: json['pattern'],
-      invertSeparators: json['invertSeparators'],
-      country: json['country'],
-      unit: json['unit'],
-      name: json['name'],
+      symbol: json['symbol'] ?? r'$',
+      pattern: json['pattern'] ?? Currency.defaultPattern,
+      groupSeparator: json['groupSeparator'] ?? ',',
+      decimalSeparator: json['decimalSeparator'] ?? '.',
+      country: json['country'] ?? '',
+      unit: json['unit'] ?? '',
+      name: json['name'] ?? '',
     );
   }
 }
@@ -93,7 +96,7 @@ extension FixedImprover on Fixed {
   static Fixed fromJson(Map<String, dynamic> json) {
     return Fixed.fromBigInt(
       BigInt.parse(json['minorUnits']),
-      scale: json['scale'],
+      scale: json['scale'] ?? 2,
     );
   }
 }

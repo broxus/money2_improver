@@ -28,11 +28,12 @@ void main() {
     final c1 = CurrencyImprover.fromJson(json);
     expect(c0, c1);
 
-    expect(c1.code, c0.code);
-    expect(c1.scale, c0.scale);
+    expect(c1.isoCode, c0.isoCode);
+    expect(c1.decimalDigits, c0.decimalDigits);
     expect(c1.symbol, c0.symbol);
     expect(c1.pattern, c0.pattern);
-    expect(c1.invertSeparators, c0.invertSeparators);
+    expect(c1.groupSeparator, c0.groupSeparator);
+    expect(c1.decimalSeparator, c0.decimalSeparator);
     expect(c1.country, c0.country);
     expect(c1.unit, c0.unit);
     expect(c1.name, c0.name);
@@ -44,7 +45,8 @@ void main() {
       9,
       symbol: 'EVER',
       pattern: '0.######### S',
-      invertSeparators: true,
+      groupSeparator: '.',
+      decimalSeparator: ',',
       country: 'AA',
       unit: 'abux',
       name: 'AA bux',
@@ -53,11 +55,12 @@ void main() {
     final c1 = CurrencyImprover.fromJson(json);
     expect(c0, c1);
 
-    expect(c1.code, c0.code);
-    expect(c1.scale, c0.scale);
+    expect(c1.isoCode, c0.isoCode);
+    expect(c1.decimalDigits, c0.decimalDigits);
     expect(c1.symbol, c0.symbol);
     expect(c1.pattern, c0.pattern);
-    expect(c1.invertSeparators, c0.invertSeparators);
+    expect(c1.groupSeparator, c0.groupSeparator);
+    expect(c1.decimalSeparator, c0.decimalSeparator);
     expect(c1.country, c0.country);
     expect(c1.unit, c0.unit);
     expect(c1.name, c0.name);
