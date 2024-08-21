@@ -1,3 +1,7 @@
+## 2.0.0
+
+- Using money2 v5.2.1
+
 ## 1.3.3
 
 - Just update changelog :)
